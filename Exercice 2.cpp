@@ -57,23 +57,36 @@ int AnalogIn2Index(float v , int n ){
     }
 }
 
-void R(float v){
-        rouge.write(1/(0.5-v));
-}
-
-void B(float v){
-    bleu.write(1/(-0.5+v));
-}
-
-
-void V(float v){
-    if (v<0.5) {
-        vert.write(1/v);
-    }
-    else {
-        vert.write(1/(0.5-(v-0.5)));
+void R(float v) {
+    if (v < 0.5) {
+        rouge.write(1.0);
+    } else {
+        rouge.write(1.0f - 2 * (v - 0.5));
     }
 }
+
+
+
+
+void V(float v) {
+    if (v < 0.5) {
+        vert.write(1.0f - 2 * v);
+    } else {
+        vert.write(1.0f - 2 * (1 - v));
+    }
+}
+
+
+
+
+void B(float v) {
+    if (v < 0.5) {
+        bleu.write(1.0f - 2 * v);
+    } else {
+        bleu.write(1.0);
+    }
+}
+
 
 int main() {
     ResetLeds();
