@@ -65,9 +65,6 @@ void R(float v) {
     }
 }
 
-
-
-
 void V(float v) {
     if (v < 0.5) {
         vert.write(1.0f - 2 * v);
@@ -75,9 +72,6 @@ void V(float v) {
         vert.write(1.0f - 2 * (1 - v));
     }
 }
-
-
-
 
 void B(float v) {
     if (v < 0.5) {
@@ -102,7 +96,6 @@ int main() {
 
     }
 }
-
 
 
 
