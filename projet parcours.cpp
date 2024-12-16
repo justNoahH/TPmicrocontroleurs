@@ -161,7 +161,7 @@ void afficher_menu(int meilleur_score)
     lcd.locate(0, 0);
     lcd.printf("Menu Principal");
     lcd.locate(0, 10);
-    lcd.printf("1. Lancer une partie");
+    lcd.printf("1. Center pour lancer une partie");
     lcd.locate(0, 20);
     lcd.printf("2. Meilleur score: %d/12", meilleur_score);
     //lcd.locate(0, 30);
