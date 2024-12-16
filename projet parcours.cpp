@@ -106,7 +106,7 @@ void collide_brick(int billex, int billey, int depl[2], Brique allbrick[12], int
     }
 }
 
-void update(int x, int &y, int w, int h, int &billex, int &billey, int depl[2], bool &jouer, Brique allbrick[20], int &gagne)
+void update(int x, int &y, int w, int h, int &billex, int &billey, int depl[2], bool &jouer, Brique allbrick[12], int &gagne)
 {
     deplace_joueur(y);
     deplace_bille(depl, billex, billey, x, y, jouer);
