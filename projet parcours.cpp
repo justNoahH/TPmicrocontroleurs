@@ -7,8 +7,7 @@
 using namespace std;
 
 C12832 lcd(p5, p7, p6, p8, p11);
-DigitalIn selectButton(p14);
-DigitalIn startButton(p13);
+DigitalIn startButton(p14);
 DigitalIn R(p15);
 DigitalIn L(p12);
 
@@ -19,10 +18,10 @@ struct Brique
     bool affiche;
 };
 
-void affiche_ecran(int x, int y, int w, int h, int billex, int billey, Brique allbrick[20])
+void affiche_ecran(int x, int y, int w, int h, int billex, int billey, Brique allbrick[12])
 {
     lcd.cls();
-    for(int i = 0; i < 20; i += 1)
+    for(int i = 0; i < 12; i += 1)
     {
         if(allbrick[i].affiche)
         {
@@ -136,7 +135,7 @@ int lire_meilleur_score()
     FILE* file = fopen("/local/SCORE.txt", "r");
     if (file == NULL)
     {
-        return 0; // Pas de fichier ou erreur d'ouverture
+        return 0;
     }
 
     int meilleur_score = 0;
@@ -165,16 +164,16 @@ void afficher_menu(int meilleur_score)
     lcd.printf("1. Lancer une partie");
     lcd.locate(0, 20);
     lcd.printf("2. Meilleur score: %d/12", meilleur_score);
-    lcd.locate(0, 30);
-    lcd.printf("Appuyez sur start");
+    //lcd.locate(0, 30);
+    //lcd.printf("Appuyez sur start");
 }
 
-void lancer_partie()
+int lancer_partie()
 {
     int x = lcd.width() - 9, y = lcd.height() / 2, w = 1, h = 5;
     int depl[2] = {-1, 1}, billex = lcd.width() - 12, billey = lcd.height() / 2, gagne = 0;
     bool jouer = true;
-    Brique allbrick[20];
+    Brique allbrick[12];
     createbrick(allbrick);
 
     while (jouer)
@@ -186,7 +185,7 @@ void lancer_partie()
             lcd.locate(0, 0);
             lcd.printf("Bien joue");
             sauvegarder_score(gagne);
-            return;
+            return 1;
         }
         wait(0.01);
     }
@@ -206,7 +205,7 @@ int main()
         int meilleur_score = lire_meilleur_score();
         afficher_menu(meilleur_score);
 
-        while (!startButton.read())
+        while (not startButton.read())
         {
             wait(0.1);
         }
